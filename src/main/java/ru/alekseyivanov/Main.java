@@ -32,7 +32,7 @@ public class Main {
                         .GET()
                         .build();
 
-                // Получаем ответ от сервера в виде строкового представления
+                // Отправляем запрос и получаем ответ от сервера в виде строки содержащей json
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
                 // Преобразовываем из строки содержащей json в объект класса Weather
@@ -42,6 +42,10 @@ public class Main {
                 // Теперь мы можем использовать наши данные, например, из объекта weather можем получить
                 // температуру, давление или любые другие десериализованные данные данные
                 System.out.println(weather);
+                System.out.println();
+
+                // Или можем так
+                System.out.println("Температура в г. " + weather.getName() + ": " + weather.getMain().getTemp() + "\u00B0C");
                 System.out.println();
 
                 System.out.print("Введите название города: ");
