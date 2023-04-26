@@ -2,6 +2,10 @@ package ru.alekseyivanov.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Класс, содержащий текущие значения по скорости ветра
+ * Можно расширять в зависмости от потребности, например добавить направление ветра
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Wind {
     private double speed;

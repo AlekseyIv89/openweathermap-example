@@ -3,7 +3,7 @@ package ru.alekseyivanov.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * Класс, содержащий текущие значений погодных данных, таких как: температура, давление, влажность
+ * Класс, содержащий текущие значения погодных данных, таких как: температура, давление, влажность
  * Можно расширять в зависмости от потребности
  */
 @JsonIgnoreProperties(ignoreUnknown = true)

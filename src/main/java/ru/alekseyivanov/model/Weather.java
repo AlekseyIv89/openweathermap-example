@@ -55,6 +55,6 @@ public class Weather {
                 "\tТемпература: " + main.getTemp() + " \u00B0C (по ощущениям: " + main.getFeels_like() + " \u00B0C)\n" +
                 "\tВлажность: " + main.getHumidity() + " %\n" +
                 "\tДавление: " + main.getPressure() + " мм рт.ст.\n" +
-                "\tСкорость ветра: " + wind.getSpeed() + " м/с.\n";
+                "\tСкорость ветра: " + wind.getSpeed() + " м/с";
     }
 }

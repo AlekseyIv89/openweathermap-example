@@ -23,6 +23,7 @@ public class Main {
             while (!(city = bufferedReader.readLine()).isEmpty()) {
                 HttpClient client = HttpClient.newHttpClient();
 
+                // Подготавливаем запрос для отправки на сервер
                 HttpRequest request = HttpRequest.newBuilder(URI.create(
                             String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric&lang=ru",
                                     city, apiKey)))
@@ -31,12 +32,19 @@ public class Main {
                         .GET()
                         .build();
 
+                // Получаем ответ от сервера в виде строкового представления
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
+                // Преобразовываем из строки содержащей json в объект класса Weather
                 ObjectMapper objectMapper = new ObjectMapper();
                 Weather weather = objectMapper.readValue(response.body(), Weather.class);
 
+                // Теперь мы можем использовать наши данные, например, из объекта weather можем получить
+                // температуру, давление или любые другие десериализованные данные данные
                 System.out.println(weather);
+                System.out.println();
+
+                System.out.print("Введите название города: ");
             }
         }
     }
