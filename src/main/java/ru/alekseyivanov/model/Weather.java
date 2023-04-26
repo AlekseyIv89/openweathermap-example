@@ -11,7 +11,6 @@ public class Weather {
     private String name;
     private CurrentWeather main;
     private Coordinates coord;
-
     private Wind wind;
 
     public Weather() {
