@@ -50,6 +50,8 @@ public class Main {
                 } else if (response.statusCode() == 401 && response.body().contains("Invalid API key")) {
                     System.out.println("Неверный API-ключ.");
                     break;
+                } else if (response.statusCode() == 429 && response.body().contains("")) {
+
                 }
 
                 // Преобразовываем из строки содержащей json в объект класса Weather
