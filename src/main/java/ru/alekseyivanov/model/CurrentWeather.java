@@ -1,6 +1,7 @@
 package ru.alekseyivanov.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
  * Класс, содержащий текущие значения погодных данных, таких как: температура, давление, влажность
@@ -10,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class CurrentWeather {
     private double temp;
     private double feels_like;
+
+    @JsonSetter("grnd_level") // С помощью этой аннотации можем сопоставить поле в строке json с нашим полем
     private int pressure;
     private int humidity;
 
