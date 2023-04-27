@@ -20,7 +20,7 @@ public class Main {
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
             System.out.print("Введите название города: ");
             String city;
-            while (!(city = bufferedReader.readLine()).isEmpty()) {
+            while (!(city = bufferedReader.readLine()).isBlank()) {
                 HttpClient client = HttpClient.newHttpClient();
 
                 // Подготавливаем запрос для отправки на сервер
@@ -34,6 +34,13 @@ public class Main {
 
                 // Отправляем запрос и получаем ответ от сервера в виде строки содержащей json
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+                // При неправильном вводе названия города запрос возвращает код 404 с сообщением "city not found"
+                if (response.statusCode() == 404 && response.body().contains("city not found")) {
+                    System.out.printf("Город %s не найден%n", city);
+                    System.out.print("Введите название города: ");
+                    continue;
+                }
 
                 // Преобразовываем из строки содержащей json в объект класса Weather
                 ObjectMapper objectMapper = new ObjectMapper();
