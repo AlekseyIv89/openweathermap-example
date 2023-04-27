@@ -3,18 +3,25 @@ package ru.alekseyivanov;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.alekseyivanov.model.Weather;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.net.http.*;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.Properties;
 
 public class Main {
-    private static final String apiKey = "e87205cf0e2383e6ce646bcdb1db0902";
+    private static String apiKey;
+
+    static {
+        try (InputStream inputStream = new FileInputStream("src/main/resources/application.properties")) {
+            Properties properties = new Properties();
+            properties.load(inputStream);
+            apiKey = properties.getProperty("apiKey");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) throws IOException, InterruptedException {
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
@@ -40,6 +47,9 @@ public class Main {
                     System.out.printf("Город %s не найден%n", city);
                     System.out.print("Введите название города: ");
                     continue;
+                } else if (response.statusCode() == 401 && response.body().contains("Invalid API key")) {
+                    System.out.println("Неверный API-ключ.");
+                    break;
                 }
 
                 // Преобразовываем из строки содержащей json в объект класса Weather
